@@ -4,7 +4,7 @@ import React from "react";
  function BotCollection({ bots, onEnlist, onDischarge }) {
     return (
       <div className="ui four column grid">
-        <div className="row">
+        <div className="bot-grid">
         {bots.map(bot => (
            <BotCard
              key={bot.id}

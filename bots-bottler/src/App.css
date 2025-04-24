@@ -1,0 +1,21 @@
+.bot-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 1.5rem;
+    padding: 1rem;
+  }
+  
+  .bot-card {
+    background-color: #202020;
+    border-radius: 12px;
+    padding: 1rem;
+    color: white;
+    box-shadow: 0 4px 8px rgba(0, 255, 100, 0.2);
+    text-align: center;
+    transition: transform 0.2s;
+  }
+  
+  .bot-card:hover {
+    transform: scale(1.03);
+  }
+  

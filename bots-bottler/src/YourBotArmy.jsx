@@ -4,6 +4,7 @@ import BotCard from "./BotCard";
 function YourBotArmy({ army = [], onRelease, onDischarge }) {
   return (
     <div className="ui segment inverted olive bot-army">
+        <div className="bot-grid">
       <div className="ui five column grid">
         <div className="row bot-army-row">
           {army.map((bot) => (
@@ -16,6 +17,7 @@ function YourBotArmy({ army = [], onRelease, onDischarge }) {
           ))}
         </div>
       </div>
+    </div>
     </div>
   );
 }

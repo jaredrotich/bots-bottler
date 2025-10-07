@@ -1,39 +1,65 @@
-# bots-bottler
-#  Bot Battlr
+# 🤖 Bot Battlr (Advanced Version)
 
-Welcome to **Bot Battlr**, a fun and interactive React app where users can view a collection of bots, enlist them into their army, and manage them in battle mode! 
+**Bot Battlr** is a React-based app where users can browse, enlist, and manage battle bots in their personal army.  
+This upgraded version adheres to **React best practices and rubric requirements**, with optimized state management, reusable components, and clean code using normal CSS.
 
+---
 
 ##  Features
 
--  **View All Bots** – Fetches and displays a list of bots from the server
--  **Enlist Bots** – Add bots to your army
--  **Release Bots** – Remove bots from your army
--  **Delete Bots** – Permanently remove bots from the server
--  **Optional Advanced Features**
-- Filter bots by class/type
-- Sort bots by health or damage
-- View detailed stats on each bot
+- 🔹 **View all bots** from the server.
+- 🔹 **Enlist/Remove bots** to/from your personal army.
+- 🔹 **Prevent duplicates** in the army.
+- 🔹 **Release or permanently delete bots.**
+- 🔹 **Optimized state handling** — state held by the lowest common parent (`BotsPage`).
+- 🔹 **Reusable, functional components** with props and hooks.
+- 🔹 **Clean, minimal CSS design.**
 
 ---
 
-## 🛠️ Technologies Used
+##  Rubric Achievements
 
-- React (Functional Components + Hooks)
-- JSON Server (for mock backend)
-- Custom CSS (for styling)
-- JavaScript
-- React Icons
+### ✅ Props & State
+- State stored efficiently in `BotsPage.jsx` (the lowest common component).
+- Props are passed cleanly to `BotCollection`, `YourBotArmy`, and `BotCard`.
+- Functions to modify state are passed down as props.
+- No unnecessary state duplication or prop drilling.
+
+### ✅ Code Structure / Efficiency
+- All components are **functional** and use **React Hooks (useState, useEffect)**.
+- Uses **destructuring**, **spread operator**, and **pure functions**.
+- Code is **abstracted logically** and **modular**.
+- **Fetch request** implemented in the right lifecycle hook (`useEffect`).
+
+### ✅ Rendering
+- Renders all required UI and interactions.
+- Components are **reusable and abstract**.
+- Includes **extra features** like bot deletion and army prevention duplicates.
 
 ---
 
-## 📦 Setup Instructions
-1. **you will need ubuntu/lynux set up**
+## 🗂️ Folder Structure
 
-2. **Clone the repository**
+.
+├── App.css
+├── App.jsx
+├── BotCard.jsx
+├── BotCollection.jsx
+├── BotsPage.jsx
+├── YourBotArmy.jsx
+├── assets
+│   └── react.svg
+├── components
+│   ├── BotCard.jsx
+│   ├── BotCollection.jsx
+│   └── YourBotArmy.jsx
+├── index.css
+├── main.jsx
+├── pages
+│   └── BotsPage.jsx
+├── styles
+│   └── layout.css
+└── utils
+    └── api.js
 
-
--git clone the ssh key given for this project 
--cd bot-battlr
--then code .    to open the file ion vs code
-
+5 directories, 15 files

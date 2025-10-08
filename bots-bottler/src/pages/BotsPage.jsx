@@ -2,10 +2,7 @@ import React, { useEffect, useState } from "react";
 import BotCollection from "../components/BotCollection";
 import YourBotArmy from "../components/YourBotArmy";
 import "../styles/layout.css";
-
-const API_URL =
-  "https://my-json-server.typicode.com/jaredrotich/bots-bottler/bots";
-
+import { fetchBots } from "../api"; 
 const BotsPage = () => {
   const [bots, setBots] = useState([]);
   const [army, setArmy] = useState([]);
@@ -13,46 +10,34 @@ const BotsPage = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  // Fetch bots from hosted JSON server
   useEffect(() => {
-    const fetchBots = async () => {
+    const loadBots = async () => {
       try {
-        const res = await fetch(API_URL);
-        if (!res.ok) throw new Error("Failed to fetch bots");
-        const data = await res.json();
+        const data = await fetchBots();
         setBots(data);
-      } catch (err) {
-        console.error("Error fetching bots:", err);
+      } catch {
         setError("Unable to load bots. Please try again later.");
       } finally {
         setLoading(false);
       }
     };
 
-    fetchBots();
+    loadBots();
   }, []);
 
-  // Enlist bot into army
   const enlistBot = (bot) => {
     if (!army.some((b) => b.id === bot.id)) {
-      setArmy((prevArmy) => [...prevArmy, bot]);
+      setArmy([...army, bot]);
     }
   };
 
-  // Release bot from army
   const releaseBot = (bot) => {
-    setArmy((prevArmy) => prevArmy.filter((b) => b.id !== bot.id));
+    setArmy(army.filter((b) => b.id !== bot.id));
   };
 
-  // Discharge bot completely
   const dischargeBot = (id) => {
-    setBots((prevBots) => prevBots.filter((b) => b.id !== id));
-    setArmy((prevArmy) => prevArmy.filter((b) => b.id !== id));
-  };
-
-  // Filter bots by class
-  const handleFilterChange = (e) => {
-    setFilter(e.target.value);
+    setBots(bots.filter((b) => b.id !== id));
+    setArmy(army.filter((b) => b.id !== id));
   };
 
   const filteredBots =
@@ -68,7 +53,7 @@ const BotsPage = () => {
 
       <div className="filter-bar">
         <label>Filter by Class: </label>
-        <select value={filter} onChange={handleFilterChange}>
+        <select value={filter} onChange={(e) => setFilter(e.target.value)}>
           <option value="All">All</option>
           <option value="Support">Support</option>
           <option value="Medic">Medic</option>

@@ -3,8 +3,8 @@ import BotCollection from "../components/BotCollection";
 import YourBotArmy from "../components/YourBotArmy";
 import "../styles/layout.css";
 
-
-const API_URL = "https://my-json-server.typicode.com/jaredrotich/bots-bottler/bots";
+const API_URL =
+  "https://my-json-server.typicode.com/jaredrotich/bots-bottler/bots";
 
 const BotsPage = () => {
   const [bots, setBots] = useState([]);
@@ -13,7 +13,7 @@ const BotsPage = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
- 
+  // Fetch bots from hosted JSON server
   useEffect(() => {
     const fetchBots = async () => {
       try {
@@ -32,30 +32,29 @@ const BotsPage = () => {
     fetchBots();
   }, []);
 
-  
+  // Enlist bot into army
   const enlistBot = (bot) => {
-    if (!army.find((b) => b.id === bot.id)) {
-      setArmy([...army, bot]);
+    if (!army.some((b) => b.id === bot.id)) {
+      setArmy((prevArmy) => [...prevArmy, bot]);
     }
   };
 
-  
+  // Release bot from army
   const releaseBot = (bot) => {
-    setArmy(army.filter((b) => b.id !== bot.id));
+    setArmy((prevArmy) => prevArmy.filter((b) => b.id !== bot.id));
   };
 
-  
+  // Discharge bot completely
   const dischargeBot = (id) => {
-    setBots(bots.filter((b) => b.id !== id));
-    setArmy(army.filter((b) => b.id !== id));
+    setBots((prevBots) => prevBots.filter((b) => b.id !== id));
+    setArmy((prevArmy) => prevArmy.filter((b) => b.id !== id));
   };
 
- 
+  // Filter bots by class
   const handleFilterChange = (e) => {
     setFilter(e.target.value);
   };
 
-  
   const filteredBots =
     filter === "All" ? bots : bots.filter((bot) => bot.bot_class === filter);
 
@@ -80,11 +79,12 @@ const BotsPage = () => {
         </select>
       </div>
 
-      
       {loading ? (
-        <p className="loading">Loading bots...</p>
+        <p className="loading">⚙️ Loading bots...</p>
       ) : error ? (
-        <p className="error">{error}</p>
+        <p className="error">❌ {error}</p>
+      ) : filteredBots.length === 0 ? (
+        <p className="no-bots">No bots available.</p>
       ) : (
         <BotCollection bots={filteredBots} onEnlist={enlistBot} />
       )}
